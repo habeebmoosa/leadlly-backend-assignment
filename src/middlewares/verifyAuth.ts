@@ -4,6 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 interface AuthenticatedRequest extends Request {
     email?: string;
     userId?: string;
+    role?: string;
 }
 
 export const verifyAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
@@ -18,6 +19,7 @@ export const verifyAuth = (req: AuthenticatedRequest, res: Response, next: NextF
         if (typeof data !== 'string') {
             req.email = data.email;
             req.userId = data.id;
+            req.role = data.role;
 
             next();
         } else {
